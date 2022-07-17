@@ -1,0 +1,3 @@
+pychromecast
+plexapi
+python-crontab
