@@ -8,7 +8,7 @@
 pip install -r requirements.txt
 ```
 
-3. Create a new file called `secret.py` with the following content. Replace with the URL and port of your Plex server
+3. Create a new file called `secret.py` with the following content. Replace with the URL and port of your Plex server.
 
 ```python
 # Replace with your own Plex URL, including port.
