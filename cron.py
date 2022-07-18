@@ -7,5 +7,5 @@ with CronTab(user=True) as cron:
 
     job = cron.new(command=f'python {dir_path}/plex.py "Kitchen Display" "Christmas Music"')
     job.dow.on('SUN', 'MON', 'TUE')
-    job.hour.every(16)
+    job.hour.on(16)
     job.minute.on(41)
