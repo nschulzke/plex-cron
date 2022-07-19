@@ -11,8 +11,10 @@ import secret
 
 parser = argparse.ArgumentParser(description='Play a Plex playlist.')
 
-parser.add_argument('device', type=str, help='The device on which to play')
-parser.add_argument('playlist', type=str, help='The playlist to play')
+parser.add_argument('device', type=str, help='The device on which to play.')
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument('--playlist', dest='playlist', type=str, help='The playlist to play. Mutually exclusive with --track.')
+group.add_argument('--track', dest='track', type=str, help='The track to play. Mutually exclusive with --playlist.')
 parser.add_argument('--shuffle', dest='shuffle', default=False, action='store_true')
 parser.add_argument('--volume', type=int, default=None)
 
@@ -38,7 +40,10 @@ if not cast:
 
 plex_server = PlexServer(PLEX_URL, PLEX_TOKEN)
 
-media = plex_server.playlist(args.playlist).items()
+if (args.track):
+    media = plex_server.library.search(title=args.track, libtype=PLEX_LIBRARY, sort="addedAt:desc", limit=1)
+else:
+    media = plex_server.playlist(args.playlist)
 
 if (args.shuffle):
     random.shuffle(media)
