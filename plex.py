@@ -6,12 +6,14 @@ from plexapi.server import PlexServer
 import pychromecast
 from pychromecast.controllers.plex import PlexController
 
+import random
 import secret
 
 parser = argparse.ArgumentParser(description='Play a Plex playlist.')
 
 parser.add_argument('device', type=str, help='The device on which to play')
 parser.add_argument('playlist', type=str, help='The playlist to play')
+parser.add_argument('--shuffle', dest='shuffle', default=False, action='store_true')
 
 args = parser.parse_args()
 
@@ -35,7 +37,10 @@ if not cast:
 
 plex_server = PlexServer(PLEX_URL, PLEX_TOKEN)
 
-media = plex_server.playlist(args.playlist)
+media = plex_server.playlist(args.playlist).items()
+
+if (args.shuffle):
+    random.shuffle(media)
 
 plex_c = PlexController()
 cast.register_handler(plex_c)
