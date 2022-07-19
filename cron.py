@@ -1,7 +1,8 @@
 import os
+from crontab import CronTab
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 script = f'python {dir_path}/plex.py'
-from crontab import CronTab
 
 with CronTab(user=True) as cron:
     cron.remove_all()
