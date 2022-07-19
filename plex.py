@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description='Play a Plex playlist.')
 parser.add_argument('device', type=str, help='The device on which to play')
 parser.add_argument('playlist', type=str, help='The playlist to play')
 parser.add_argument('--shuffle', dest='shuffle', default=False, action='store_true')
+parser.add_argument('--volume', type=int, default=None)
 
 args = parser.parse_args()
 
@@ -45,6 +46,9 @@ if (args.shuffle):
 plex_c = PlexController()
 cast.register_handler(plex_c)
 cast.wait()
+
+if (args.volume is not None):
+    plex_c.set_volume(args.volume)
 
 plex_c.block_until_playing(media)
 
