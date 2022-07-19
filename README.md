@@ -19,7 +19,7 @@ PLEX_URL = "http://0.0.0.0:0000"
 PLEX_TOKEN = "[YOUR_TOKEN_HERE]"
 ```
 
-3. Edit cron.py to include the scheduled playlists you actually want to run. Modify the cast device and playlist name but keep the rest of the scripts.
+3. Edit cron.py to include the scheduled playlists and tracks you actually want to run. Modify the cast device and track/playlist name.
 
 4. Save the cron tasks:
 
