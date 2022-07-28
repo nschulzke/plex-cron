@@ -41,9 +41,9 @@ if not cast:
 plex_server = PlexServer(PLEX_URL, PLEX_TOKEN)
 
 if (args.track):
-    media = plex_server.library.search(title=args.track, libtype=PLEX_LIBRARY, sort="addedAt:desc", limit=1)
+    media = list(plex_server.library.search(title=args.track, libtype=PLEX_LIBRARY, sort="addedAt:desc", limit=1))
 else:
-    media = plex_server.playlist(args.playlist)
+    media = list(plex_server.playlist(args.playlist))
 
 if (args.shuffle):
     random.shuffle(media)
